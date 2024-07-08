@@ -4,13 +4,13 @@ import 'package:candlesticks/src/constant/scales.dart';
 
 class PriceColumn extends StatelessWidget {
   const PriceColumn({
-    Key? key,
+    super.key,
     required this.tileHeight,
     required this.high,
     required this.scaleIndex,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   final double tileHeight;
   final double high;
@@ -21,17 +21,17 @@ class PriceColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
       top: 20 - tileHeight / 2,
-      child: Container(
+      child: SizedBox(
         height: height,
         width: width,
         child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: 100,
           itemBuilder: (context, index) {
             return AnimatedContainer(
-              duration: Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 400),
               height: tileHeight,
               child: Center(
                 child: Row(

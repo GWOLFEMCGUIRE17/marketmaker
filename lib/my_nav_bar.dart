@@ -3,7 +3,7 @@ import 'package:swipe/style/radiant_gradient_mask.dart';
 
 class MyNavBar extends StatefulWidget {
   final Function() notifyParent;
-  const MyNavBar({Key? key, required this.notifyParent}) : super(key: key);
+  const MyNavBar({super.key, required this.notifyParent});
 
   @override
   MyNavBarState createState() => MyNavBarState();
@@ -34,7 +34,7 @@ class MyNavBarState extends State<MyNavBar> {
             height: screenHeight / 30,
             image: AssetImage(bottomNavIndex == 0 ? 'assets/s.png' : 'assets/s_gray.png'),
           ),
-          title: const SizedBox.shrink(),
+          label: const SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
           icon: bottomNavIndex == 0 ? Icon(
@@ -46,7 +46,7 @@ class MyNavBarState extends State<MyNavBar> {
                 size: screenHeight / 30,
               )
           ),
-          title: const SizedBox.shrink(),
+          label: const SizedBox.shrink(),
         ),
       ],
       currentIndex: bottomNavIndex,

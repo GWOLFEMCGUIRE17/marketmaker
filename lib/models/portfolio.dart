@@ -37,7 +37,7 @@ class Portfolio {
             ),
           );
         } catch (exception) {
-          Stock s = await StockServices.fetchStock(ticker + "-USD");
+          Stock s = await StockServices.fetchStock("$ticker-USD");
           AssetCard card = AssetCard(asset: s);
           OneContext().push(
             MaterialPageRoute(
@@ -76,7 +76,7 @@ class Portfolio {
               SizedBox(
                 width: screenWidth / 2.6,
                 child: Text(
-                  name + " " + "($ticker)",
+                  "$name ($ticker)",
                   style: TextStyle(
                     fontSize: screenHeight / 50,
                     color: AppColors.blackText,
@@ -125,7 +125,7 @@ class Portfolio {
       items.add(SizedBox(height: screenHeight / 100));
       return true;
     } catch(error) {
-      throw(error);
+      rethrow;
       return false;
     }
   }
@@ -144,11 +144,11 @@ class Portfolio {
 
   static String formatPrice(double price) {
     final format = NumberFormat("#,##0.00", "en_US");
-    return '\$' + format.format(price);
+    return '\$${format.format(price)}';
   }
 
   static String formatChange(double change) {
     final format = NumberFormat("#,##0.00", "en_US");
-    return (change < 0 ? '' : '+') + format.format(change) + "%";
+    return "${change < 0 ? '' : '+'}${format.format(change)}%";
   }
 }

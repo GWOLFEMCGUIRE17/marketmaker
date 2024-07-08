@@ -4,7 +4,7 @@ import 'package:swipe/style/app_colors.dart';
 import 'package:swipe/watchlist_page.dart';
 
 class AddWatchlistCard extends StatefulWidget {
-  AddWatchlistCard({Key? key}) : super(key: key);
+  const AddWatchlistCard({super.key});
 
   @override
   _AddWatchlistCardState createState() => _AddWatchlistCardState();
@@ -71,7 +71,7 @@ class _AddWatchlistCardState extends State<AddWatchlistCard> {
                       loading = true;
                     });
                     bool result = await Portfolio.addToPortfolio(context, controller.text);
-                    bool result2 = await Portfolio.addToPortfolio(context, controller.text + "-USD");
+                    bool result2 = await Portfolio.addToPortfolio(context, "${controller.text}-USD");
                     print('adding to watchlist: $result');
                     print('adding to watchlist: $result2');
                     if (result || result2) {

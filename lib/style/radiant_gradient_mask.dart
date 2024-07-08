@@ -5,7 +5,7 @@ import 'dart:ui' as ui;
 
 class RadiantGradientMask extends StatelessWidget {
   @override
-  const RadiantGradientMask({Key? key, required this.child}) : super(key: key);
+  const RadiantGradientMask({super.key, required this.child});
   final Widget child;
 
   @override

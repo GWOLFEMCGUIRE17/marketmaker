@@ -3,7 +3,7 @@
 import 'package:candlesticks/candlesticks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:bezier_chart/bezier_chart.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:swipe/graph_card.dart';
 import 'package:swipe/chart_candles_data.dart';
 import 'package:swipe/main.dart';
@@ -17,7 +17,7 @@ import 'models/asset.dart';
 class AssetCard extends StatefulWidget {
   final Asset asset;
   int? index;
-  AssetCard({Key? key, required this.asset, this.index}) : super(key: key);
+  AssetCard({super.key, required this.asset, this.index});
 
   @override
   AssetCardState createState() => AssetCardState();
@@ -109,9 +109,7 @@ class AssetCardState extends State<AssetCard> {
   void initState() {
     super.initState();
     getDataPoints();
-    endPointUrl = "https://newsapi.org/v2/everything?q=" +
-        widget.asset.name +
-        "&from=2021-10-24&sortBy=popularity&apiKey=61c4a69dd3c34d9aaf4737ff5c309a7f";
+    endPointUrl = "https://newsapi.org/v2/everything?q=${widget.asset.name}&from=2021-10-24&sortBy=popularity&apiKey=61c4a69dd3c34d9aaf4737ff5c309a7f";
   }
 
   @override
@@ -214,19 +212,16 @@ class AssetCardState extends State<AssetCard> {
                           (widget.asset.data.closePrice -
                                       widget.asset.data.openPrice) >
                                   0
-                              ? "+" +
-                                  (((widget.asset.data.closePrice -
+                              ? "+${(((widget.asset.data.closePrice -
                                                   widget.asset.data.openPrice) /
                                               widget.asset.data.openPrice) *
                                           100)
-                                      .toStringAsFixed(2) +
-                                  " %"
-                              : (((widget.asset.data.closePrice -
+                                      .toStringAsFixed(2)} %"
+                              : "${(((widget.asset.data.closePrice -
                                                   widget.asset.data.openPrice) /
                                               widget.asset.data.openPrice) *
                                           100)
-                                      .toStringAsFixed(2) +
-                                  " %",
+                                      .toStringAsFixed(2)} %",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -365,7 +360,7 @@ class AssetCardState extends State<AssetCard> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                    widget.asset.newsData.articles.length >= 1 ? widget.asset.newsData.articles[0].title : '',
+                    widget.asset.newsData.articles.isNotEmpty ? widget.asset.newsData.articles[0].title : '',
                     style: TextStyle(color: Colors.white),
                 ),
               ],

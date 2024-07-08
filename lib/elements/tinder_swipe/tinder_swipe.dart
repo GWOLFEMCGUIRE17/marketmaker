@@ -25,7 +25,7 @@ class TinderSwipe extends StatefulWidget {
   /// How long does it have to wait until the next slide is sliable? less is quicker. 100 is fast enough. 500 is a bit slow.
   final int delaySlideFor;
 
-  TinderSwipe({
+  TinderSwipe({super.key, 
     required this.cards,
     this.controller,
     this.onForward,
@@ -35,7 +35,7 @@ class TinderSwipe extends StatefulWidget {
     this.slideSpeed = 20,
     this.delaySlideFor = 500,
     this.size = const Size(380, 400),
-  })  : assert(cards.length > 0);
+  })  : assert(cards.isNotEmpty);
 
   @override
   TinderSwipeState createState() => TinderSwipeState();

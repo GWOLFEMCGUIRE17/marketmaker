@@ -19,7 +19,7 @@ class CandlesticksGraph extends StatefulWidget {
 
   final List<String>? intervals;
 
-  CandlesticksGraph({
+  const CandlesticksGraph({super.key, 
     required this.candles,
     required this.onIntervalChange,
     required this.interval,
@@ -35,7 +35,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
   /// index of the newest candle to be displayed
   /// changes when user scrolls along the chart
   int index = -10;
-  ScrollController scrollController = new ScrollController();
+  ScrollController scrollController = ScrollController();
 
   double hoverX = 0.0;
   double hoverY = 0.0;
@@ -163,7 +163,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
         Expanded(
           child: TweenAnimationBuilder(
             tween: Tween(begin: 6.toDouble(), end: candleWidth),
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOutCirc,
             builder: (_, width, __) {
               return Chart(

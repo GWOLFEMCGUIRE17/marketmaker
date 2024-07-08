@@ -7,6 +7,6 @@ import 'package:yahoofin/yahoofin.dart';
 
 class Stock extends Asset {
 
-  Stock(String symbol, String name, AssetData stockData, ChartQuotes priceData, NewsData newsData) : super(symbol, name, stockData, priceData, newsData);
+  Stock(super.symbol, super.name, super.stockData, super.priceData, super.newsData);
 
 }

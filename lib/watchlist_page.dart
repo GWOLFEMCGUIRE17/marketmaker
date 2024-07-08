@@ -3,7 +3,7 @@ import 'package:swipe/style/app_colors.dart';
 
 class WatchlistPage extends StatefulWidget {
   final List<Widget> items;
-  WatchlistPage(this.items, {Key? key}) : super(key: key);
+  const WatchlistPage(this.items, {super.key});
 
   @override
   WatchlistPageState createState() {
@@ -16,7 +16,7 @@ class WatchlistPageState extends State<WatchlistPage> {
   static WatchlistPageState? stateReference;
 
   updateState() {
-    this.setState(() {
+    setState(() {
       print('Setting state');
     });
   }

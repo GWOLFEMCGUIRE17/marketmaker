@@ -6,14 +6,14 @@ class GraphCardWidget extends StatelessWidget {
   final bool isActive;
 
   final int activeIndex;
-  GraphCardWidget({
-    Key? key,
+  const GraphCardWidget({
+    super.key,
     required this.title,
     required this.activeColor,
     required this.fontColor,
     required this.isActive,
     required this.activeIndex,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

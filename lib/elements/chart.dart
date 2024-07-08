@@ -48,7 +48,7 @@ class Chart extends StatelessWidget {
   final void Function(double) onPanDown;
   final void Function() onPanEnd;
 
-  Chart({
+  const Chart({super.key, 
     required this.onScaleUpdate,
     required this.onHorizontalDragUpdate,
     required this.candleWidth,
@@ -73,14 +73,14 @@ class Chart extends StatelessWidget {
 
   String priceToString(double price) {
     int log = log10(price).floor();
-    if (log > 9)
+    if (log > 9) {
       return "${price ~/ 1000000000}B";
-    else if (log > 6)
+    } else if (log > 6)
       return "${price ~/ 1000000}M";
     else if (log > 3)
       return "${price ~/ 1000}K";
     else
-      return "${price.toStringAsFixed(2)}";
+      return price.toStringAsFixed(2);
   }
 
   String numberFormat(int value) {
@@ -129,7 +129,7 @@ class Chart extends StatelessWidget {
 
         return TweenAnimationBuilder(
           tween: Tween(begin: low, end: high),
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           builder: (context, high, _) {
             return TweenAnimationBuilder(
               tween: Tween(begin: low, end: low),
@@ -140,7 +140,7 @@ class Chart extends StatelessWidget {
                   candles.length - 2
                 );
                 return Container(
-                  color: Color(0xff0f0f0f),
+                  color: const Color(0xff0f0f0f),
                   child: Stack(
                     children: [
                       TimeRow(
@@ -164,7 +164,7 @@ class Chart extends StatelessWidget {
                                   height: maxHeight,
                                 ),
                                 AnimatedPositioned(
-                                  duration: Duration(microseconds: 300),
+                                  duration: const Duration(microseconds: 300),
                                   right: 0,
                                   top: maxHeight -
                                       30 -
@@ -186,6 +186,8 @@ class Chart extends StatelessWidget {
                                                 .open
                                             ? ColorPalette.darkRed
                                             : ColorPalette.darkGreen,
+                                        width: 50,
+                                        height: 20,
                                         child: Center(
                                           child: Text(
                                             candles[index >= 0 ? index : 0]
@@ -196,8 +198,6 @@ class Chart extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        width: 50,
-                                        height: 20,
                                       ),
                                     ],
                                   ),
@@ -227,7 +227,7 @@ class Chart extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 50,
                                     ),
                                   ],
@@ -235,7 +235,7 @@ class Chart extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                         ],
@@ -252,6 +252,8 @@ class Chart extends StatelessWidget {
                             ),
                             Container(
                               color: ColorPalette.digalogColor,
+                              width: 50,
+                              height: 20,
                               child: Center(
                                 child: Text(
                                   hoverY < maxHeight
@@ -270,13 +272,12 @@ class Chart extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              width: 50,
-                              height: 20,
                             ),
                           ],
                         ),
                       ),
                       Positioned(
+                        left: hoverX,
                         child: Column(
                           children: [
                             DashLine(
@@ -287,7 +288,6 @@ class Chart extends StatelessWidget {
                             ),
                           ],
                         ),
-                        left: hoverX,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 50, bottom: 20),
@@ -306,7 +306,7 @@ class Chart extends StatelessWidget {
                               onPanDown(update.localPosition.dx);
                             },
                             child: Container(
-                              color: Color.fromARGB(1, 255, 255, 255),
+                              color: const Color.fromARGB(1, 255, 255, 255),
                             ),
                           ),
                         ),

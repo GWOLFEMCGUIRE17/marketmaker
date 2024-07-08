@@ -10,7 +10,6 @@ import 'package:swipe/main.dart';
 import 'package:swipe/services/stocks.dart';
 import 'package:swipe/style/app_colors.dart';
 import 'package:yahoofin/yahoofin.dart';
-import 'models/stock_data.dart';
 import 'package:swipe/services/article_list_view.dart';
 import 'elements/candlesticks.dart';
 import 'models/asset.dart';

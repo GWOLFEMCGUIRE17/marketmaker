@@ -40,6 +40,8 @@ dependencies:
   one_context: ^1.1.1
   provider: ^3.1.0
 
+  intl: any
+  http: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

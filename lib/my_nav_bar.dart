@@ -34,7 +34,7 @@ class MyNavBarState extends State<MyNavBar> {
             height: screenHeight / 30,
             image: AssetImage(bottomNavIndex == 0 ? 'assets/s.png' : 'assets/s_gray.png'),
           ),
-          label: const SizedBox.shrink(),
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: bottomNavIndex == 0 ? Icon(
@@ -46,7 +46,7 @@ class MyNavBarState extends State<MyNavBar> {
                 size: screenHeight / 30,
               )
           ),
-          label: const SizedBox.shrink(),
+          label: '',
         ),
       ],
       currentIndex: bottomNavIndex,

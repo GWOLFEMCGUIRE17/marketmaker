@@ -226,6 +226,8 @@ class Chart extends StatelessWidget {
                                             index: index,
                                             high: high,
                                             low: low, 
+                                            bearColor: DarkColorPalette.secondaryRed,
+                                            bullColor: DarkColorPalette.secondaryGreen,
                                           ),
                                         ),
                                       ),

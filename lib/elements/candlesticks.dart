@@ -1,30 +1,59 @@
 import 'dart:math';
-import 'package:candlesticks/src/constant/intervals.dart';
 import 'package:candlesticks/src/models/candle.dart';
 import 'package:candlesticks/src/theme/color_palette.dart';
-import 'package:candlesticks/src/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-
 import 'chart.dart';
+
+/// CustomButton widget definition
+class CustomButton extends StatelessWidget {
+  final Widget child;
+  final VoidCallback onPressed;
+  final Color? color;
+  final double? width;
+
+  const CustomButton({
+    Key? key,
+    required this.child,
+    required this.onPressed,
+    this.color,
+    this.width,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width ?? 40,
+      margin: const EdgeInsets.all(2.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color ?? Colors.blue, // Background color
+        ),
+        onPressed: onPressed,
+        child: child,
+      ),
+    );
+  }
+}
 
 /// StatefulWidget that holds Chart's State (index of
 /// current position and candles width).
 class CandlesticksGraph extends StatefulWidget {
   final List<Candle> candles;
 
-  /// callback calls when user changes interval
+  /// Callback called when the user changes the interval
   final Future<void> Function(String) onIntervalChange;
 
   final String interval;
 
   final List<String>? intervals;
 
-  const CandlesticksGraph({super.key, 
+  const CandlesticksGraph({
+    Key? key,
     required this.candles,
     required this.onIntervalChange,
     required this.interval,
     this.intervals,
-  });
+  }) : super(key: key);
 
   @override
   _CandlesticksState createState() => _CandlesticksState();
@@ -32,8 +61,8 @@ class CandlesticksGraph extends StatefulWidget {
 
 /// [Candlesticks] state
 class _CandlesticksState extends State<CandlesticksGraph> {
-  /// index of the newest candle to be displayed
-  /// changes when user scrolls along the chart
+  /// Index of the newest candle to be displayed
+  /// Changes when the user scrolls along the chart
   int index = -10;
   ScrollController scrollController = ScrollController();
 
@@ -63,8 +92,8 @@ class _CandlesticksState extends State<CandlesticksGraph> {
     });
   }
 
-  /// candleWidth controls the width of the single candles.
-  ///  range: [2...10]
+  /// CandleWidth controls the width of the single candles.
+  /// Range: [2...10]
   double candleWidth = 0.0;
 
   bool showIntervals = false;
@@ -77,13 +106,19 @@ class _CandlesticksState extends State<CandlesticksGraph> {
         child: CircularProgressIndicator(),
       );
     }
-    Color rangeButtonBackground = widget.candles[0].close - widget.candles[widget.candles.length - 1].close > 0 ?
-        ColorPalette.darkGreen : ColorPalette.darkRed;
+    
+    // Default intervals
+    List<String> defaultIntervals = ["1m", "5m", "15m", "1h", "4h", "1d", "1w"];
+    
+    Color rangeButtonBackground =
+        widget.candles[0].close - widget.candles[widget.candles.length - 1].close > 0
+            ? DarkColorPalette.secondaryGreen
+            : DarkColorPalette.secondaryRed;
     Color rangeButtonForeground = Colors.white;
     return Column(
       children: [
         Container(
-          color: ColorPalette.barColor,
+          color: Color.fromARGB(255, 47, 98, 23),
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Row(
@@ -97,7 +132,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                   },
                   child: Icon(
                     Icons.remove,
-                    color: ColorPalette.grayColor,
+                    color: DarkColorPalette.grayColor,
                   ),
                 ),
                 CustomButton(
@@ -109,7 +144,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                   },
                   child: Icon(
                     Icons.add,
-                    color: ColorPalette.grayColor,
+                    color: DarkColorPalette.grayColor,
                   ),
                 ),
                 CustomButton(
@@ -120,28 +155,28 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                         return Center(
                           child: Container(
                             width: 200,
-                            color: ColorPalette.digalogColor,
+                            color: LightColorPalette.dialogColor,
                             child: Wrap(
-                              children: (widget.intervals ?? intervals)
+                              children: (widget.intervals ?? defaultIntervals)
                                   .map(
                                     (e) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CustomButton(
-                                    width: 50,
-                                    color: rangeButtonBackground,
-                                    child: Text(
-                                      e,
-                                      style: TextStyle(
-                                        color: rangeButtonForeground,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CustomButton(
+                                        width: 50,
+                                        color: rangeButtonBackground,
+                                        child: Text(
+                                          e,
+                                          style: TextStyle(
+                                            color: rangeButtonForeground,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          widget.onIntervalChange(e);
+                                          Navigator.of(context).pop();
+                                        },
                                       ),
                                     ),
-                                    onPressed: () {
-                                      widget.onIntervalChange(e);
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ),
-                              )
+                                  )
                                   .toList(),
                             ),
                           ),
@@ -152,7 +187,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                   child: Text(
                     widget.interval,
                     style: TextStyle(
-                      color: ColorPalette.grayColor,
+                      color: DarkColorPalette.grayColor,
                     ),
                   ),
                 ),
@@ -172,7 +207,6 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                     candleWidth *= scale;
                     candleWidth = min(candleWidth, 10);
                     candleWidth = max(candleWidth, 2);
-                    candleWidth.toInt();
                   });
                 },
                 onPanEnd: () {

@@ -1,3 +1,4 @@
+import 'package:candlesticks/candlesticks.dart';
 import 'package:candlesticks/src/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:candlesticks/src/constant/scales.dart';
@@ -39,12 +40,12 @@ class PriceColumn extends StatelessWidget {
                     Container(
                       width: width - 50,
                       height: 0.3,
-                      color: ColorPalette.grayColor,
+                      color: DarkColorPalette.grayColor,
                     ),
                     Text(
-                      "-${(high - scales[scaleIndex] * index).toStringAsFixed(2)}",
+                      "-${(high - kAllGalleryTextScaleValues[scaleIndex].scale! * index).toStringAsFixed(2)}",
                       style: TextStyle(
-                        color: ColorPalette.grayColor,
+                        color: DarkColorPalette.grayColor,
                         fontSize: 12,
                       ),
                     ),

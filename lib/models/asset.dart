@@ -1,4 +1,5 @@
 import 'package:swipe/models/news_data.dart';
+import 'package:swipe/models/price_data.dart';
 import 'package:yahoofin/yahoofin.dart';
 
 import 'asset_data.dart';

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'article_model.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class ApiService {
   static Future<List<NewsArticle>> getArticle(String companyName) async {

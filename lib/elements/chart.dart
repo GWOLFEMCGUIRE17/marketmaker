@@ -104,20 +104,22 @@ class Chart extends StatelessWidget {
         int scaleIndex = 0;
         final maxHeight = constraints.maxHeight - 20;
         double chartHeight = maxHeight  - 40;
-        for (int i = 0; i < scales.length; i++) {
-          double newHigh = ((high ~/ scales[i] + 1) * scales[i]).toDouble();
-          double newLow = ((low ~/ scales[i]) * scales[i]).toDouble();
+        for (int i = 0; i < kAllGalleryTextScaleValues.length; i++) {
+          double? currentScale = kAllGalleryTextScaleValues[i].scale;
+          if (currentScale != null) {
+          double newHigh = ((high ~/ currentScale + 1) * currentScale).toDouble();
+          double newLow = ((low ~/ currentScale) * currentScale).toDouble();
           double range = newHigh - newLow;
-          if (chartHeight / (range / scales[i]) > 30) {
-            tileHeight = chartHeight / (range / scales[i]);
+          if (chartHeight / (range / currentScale) > 30) {
+            tileHeight = chartHeight / (range / currentScale);
             scaleIndex = i;
             break;
           }
         }
-
+        if (currentScale != null) {
         high =
-            ((high ~/ scales[scaleIndex] + 1) * scales[scaleIndex]).toDouble();
-        low = ((low ~/ scales[scaleIndex]) * scales[scaleIndex]).toDouble();
+            ((high ~/ currentScale + 1) * currentScale).toDouble();
+        low = ((low ~/ currentScale) * currentScale).toDouble();
 
         double volumeHigh = 0;
         for (int i = 0;
@@ -146,9 +148,10 @@ class Chart extends StatelessWidget {
                       TimeRow(
                         indicatorX: hoverX,
                         candles: candles,
-                        scrollController: scrollController,
+                        ScrollController: scrollController,
                         candleWidth: candleWidth,
-                        indicatorTime: candles[i].date,
+                        indicatorTime: candles[i].date, 
+                        index: index,
                       ),
                       Column(
                         children: [
@@ -177,15 +180,15 @@ class Chart extends StatelessWidget {
                                       Container(
                                         width: constraints.maxWidth - 50,
                                         height: 0.3,
-                                        color: ColorPalette.grayColor,
+                                        color: DarkColorPalette.grayColor,
                                       ),
                                       Container(
                                         color: candles[index >= 0 ? index : 0]
                                             .close <=
                                             candles[index >= 0 ? index : 0]
                                                 .open
-                                            ? ColorPalette.darkRed
-                                            : ColorPalette.darkGreen,
+                                            ? DarkColorPalette.secondaryRed
+                                            : DarkColorPalette.secondaryGreen,
                                         width: 50,
                                         height: 20,
                                         child: Center(
@@ -193,7 +196,7 @@ class Chart extends StatelessWidget {
                                             candles[index >= 0 ? index : 0]
                                                 .close.toStringAsFixed(2),
                                             style: TextStyle(
-                                              color: ColorPalette.grayColor,
+                                              color: DarkColorPalette.grayColor,
                                               fontSize: 12,
                                             ),
                                           ),
@@ -209,7 +212,7 @@ class Chart extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           border: Border.symmetric(
                                             vertical: BorderSide(
-                                              color: ColorPalette.grayColor,
+                                              color: LightColorPalette.grayColor,
                                               width: 1,
                                             ),
                                           ),
@@ -222,7 +225,7 @@ class Chart extends StatelessWidget {
                                             candleWidth: candleWidth,
                                             index: index,
                                             high: high,
-                                            low: low,
+                                            low: low, 
                                           ),
                                         ),
                                       ),
@@ -246,12 +249,12 @@ class Chart extends StatelessWidget {
                           children: [
                             DashLine(
                               length: constraints.maxWidth - 50,
-                              color: ColorPalette.grayColor,
+                              color: LightColorPalette.grayColor,
                               direction: Axis.horizontal,
                               thickness: 1.5,
                             ),
                             Container(
-                              color: ColorPalette.digalogColor,
+                              color: DarkColorPalette.dialogColor,
                               width: 50,
                               height: 20,
                               child: Center(
@@ -267,7 +270,7 @@ class Chart extends StatelessWidget {
                                           (hoverY - maxHeight * 0.75 - 10) /
                                               (maxHeight * 0.25 - 10))),
                                   style: TextStyle(
-                                    color: ColorPalette.grayColor,
+                                    color: LightColorPalette.grayColor,
                                     fontSize: 12,
                                   ),
                                 ),
@@ -282,7 +285,7 @@ class Chart extends StatelessWidget {
                           children: [
                             DashLine(
                               length: constraints.maxHeight - 20,
-                              color: ColorPalette.grayColor,
+                              color: LightColorPalette.grayColor,
                               direction: Axis.vertical,
                               thickness: 1.5,
                             ),
@@ -310,7 +313,7 @@ class Chart extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );
@@ -318,7 +321,7 @@ class Chart extends StatelessWidget {
             );
           },
         );
-      },
-    );
-  }
-}
+      }
+    }
+  });
+}}

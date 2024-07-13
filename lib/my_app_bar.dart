@@ -3,7 +3,7 @@ import 'Style/app_colors.dart';
 import 'Style/radiant_gradient_mask.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const MyAppBar({super.key}) : preferredSize = const Size.fromHeight(kToolbarHeight);
+  const MyAppBar({Key? key}) : preferredSize = const Size.fromHeight(kToolbarHeight), super(key: key);
 
   @override
   final Size preferredSize;

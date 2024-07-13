@@ -10,7 +10,7 @@ import 'models/portfolio.dart';
 
 class SwipePage extends StatefulWidget {
   List<AssetCard> cards;
-  SwipePage({super.key, required this.cards});
+  SwipePage({Key? key, required this.cards}) : super(key: key);
 
   @override
   SwipePageState createState() => SwipePageState();

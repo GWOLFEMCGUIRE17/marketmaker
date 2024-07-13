@@ -19,7 +19,7 @@ class Chart extends StatelessWidget {
   final Function onScaleUpdate;
 
   /// scrollController controlls the horizontal time row
-  final ScrollController scrollController;
+  final ScrollController scrollController; 
 
   /// onHorizontalDragUpdate
   /// callback calls when user scrolls horizontally along the chart
@@ -45,6 +45,7 @@ class Chart extends StatelessWidget {
   final double hoverX;
   final double hoverY;
 
+
   final void Function(double) onPanDown;
   final void Function() onPanEnd;
 
@@ -58,11 +59,13 @@ class Chart extends StatelessWidget {
     required this.onEnter,
     required this.onExit,
     required this.onHover,
-    required this.hoverX,
+    required this.hoverX, 
     required this.onPanDown,
     required this.onPanEnd,
     required this.hoverY,
   });
+  
+  get scales => null;
 
   double log10(num x) => log(x) / ln10;
 
@@ -104,22 +107,20 @@ class Chart extends StatelessWidget {
         int scaleIndex = 0;
         final maxHeight = constraints.maxHeight - 20;
         double chartHeight = maxHeight  - 40;
-        for (int i = 0; i < kAllGalleryTextScaleValues.length; i++) {
-          double? currentScale = kAllGalleryTextScaleValues[i].scale;
-          if (currentScale != null) {
-          double newHigh = ((high ~/ currentScale + 1) * currentScale).toDouble();
-          double newLow = ((low ~/ currentScale) * currentScale).toDouble();
+        for (int i = 0; i < scales.length; i++) {
+          double newHigh = ((high ~/ scales[i] + 1) * scales[i]).toDouble();
+          double newLow = ((low ~/ scales[i]) * scales[i]).toDouble();
           double range = newHigh - newLow;
-          if (chartHeight / (range / currentScale) > 30) {
-            tileHeight = chartHeight / (range / currentScale);
+          if (chartHeight / (range / scales[i]) > 30) {
+            tileHeight = chartHeight / (range / scales[i]);
             scaleIndex = i;
             break;
           }
         }
-        if (currentScale != null) {
+
         high =
-            ((high ~/ currentScale + 1) * currentScale).toDouble();
-        low = ((low ~/ currentScale) * currentScale).toDouble();
+            ((high ~/ scales[scaleIndex] + 1) * scales[scaleIndex]).toDouble();
+        low = ((low ~/ scales[scaleIndex]) * scales[scaleIndex]).toDouble();
 
         double volumeHigh = 0;
         for (int i = 0;
@@ -148,7 +149,6 @@ class Chart extends StatelessWidget {
                       TimeRow(
                         indicatorX: hoverX,
                         candles: candles,
-                        ScrollController: scrollController,
                         candleWidth: candleWidth,
                         indicatorTime: candles[i].date, 
                         index: index,
@@ -323,7 +323,6 @@ class Chart extends StatelessWidget {
             );
           },
         );
-      }
+      });
     }
-  });
-}}
+  }

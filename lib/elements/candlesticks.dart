@@ -48,12 +48,12 @@ class CandlesticksGraph extends StatefulWidget {
   final List<String>? intervals;
 
   const CandlesticksGraph({
-    Key? key,
+    super.key,
     required this.candles,
     required this.onIntervalChange,
     required this.interval,
     this.intervals,
-  }) : super(key: key);
+  });
 
   @override
   _CandlesticksState createState() => _CandlesticksState();
@@ -118,7 +118,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
     return Column(
       children: [
         Container(
-          color: Color.fromARGB(255, 47, 98, 23),
+          color: const Color.fromARGB(255, 47, 98, 23),
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Row(
@@ -130,7 +130,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                       candleWidth = max(candleWidth, 2);
                     });
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.remove,
                     color: DarkColorPalette.grayColor,
                   ),
@@ -142,7 +142,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                       candleWidth = min(candleWidth, 10);
                     });
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.add,
                     color: DarkColorPalette.grayColor,
                   ),
@@ -186,7 +186,7 @@ class _CandlesticksState extends State<CandlesticksGraph> {
                   },
                   child: Text(
                     widget.interval,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: DarkColorPalette.grayColor,
                     ),
                   ),

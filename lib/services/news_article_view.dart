@@ -3,7 +3,7 @@
 import 'article_model.dart';
 
 class NewsArticleViewModel {
-  final NewsArticle _newsArticle;
+   final NewsArticle _newsArticle;
 
   NewsArticleViewModel({required NewsArticle article}) : _newsArticle = article;
 

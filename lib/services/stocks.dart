@@ -1,12 +1,9 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:swipe/models/asset_data.dart';
 import 'package:swipe/models/news_data.dart';
 import 'package:swipe/models/stock.dart';
-import 'package:swipe/models/stock_data.dart';
 import 'package:swipe/services/api_service.dart';
-import 'package:swipe/services/article_model.dart';
 import 'package:swipe/utils/randomizer.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:yahoofin/yahoofin.dart';

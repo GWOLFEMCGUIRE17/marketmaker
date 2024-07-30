@@ -5,8 +5,6 @@ import 'package:candlesticks/src/widgets/candle_stick_widget.dart';
 import 'package:candlesticks/src/widgets/time_row.dart';
 import 'package:candlesticks/src/widgets/dash_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:candlesticks/src/constant/scales.dart';
 import 'package:swipe/elements/price_column.dart';
 
 /// This widget manages gestures
@@ -195,7 +193,7 @@ class Chart extends StatelessWidget {
                                           child: Text(
                                             candles[index >= 0 ? index : 0]
                                                 .close.toStringAsFixed(2),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: DarkColorPalette.grayColor,
                                               fontSize: 12,
                                             ),
@@ -209,7 +207,7 @@ class Chart extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Container(
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           border: Border.symmetric(
                                             vertical: BorderSide(
                                               color: LightColorPalette.grayColor,
@@ -232,7 +230,7 @@ class Chart extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
+                                      const SizedBox(
                                       width: 50,
                                     ),
                                   ],
@@ -271,7 +269,7 @@ class Chart extends StatelessWidget {
                                       (1 -
                                           (hoverY - maxHeight * 0.75 - 10) /
                                               (maxHeight * 0.25 - 10))),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: LightColorPalette.grayColor,
                                     fontSize: 12,
                                   ),
@@ -311,7 +309,7 @@ class Chart extends StatelessWidget {
                               onPanDown(update.localPosition.dx);
                             },
                             child: Container(
-                              color: const Color.fromARGB(1, 255, 255, 255),
+                               color: const Color.fromARGB(1, 255, 255, 255),
                             ),
                           ),
                         ),

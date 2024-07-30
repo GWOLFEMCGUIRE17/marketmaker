@@ -1,4 +1,3 @@
-import 'package:candlesticks/candlesticks.dart';
 import 'package:candlesticks/src/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:candlesticks/src/constant/scales.dart';
@@ -11,7 +10,7 @@ class PriceColumn extends StatelessWidget {
     required this.scaleIndex,
     required this.width,
     required this.height,
-  });
+   });
 
   final double tileHeight;
   final double high;
@@ -44,7 +43,7 @@ class PriceColumn extends StatelessWidget {
                     ),
                     Text(
                       "-${(high - kAllGalleryTextScaleValues[scaleIndex].scale! * index).toStringAsFixed(2)}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: DarkColorPalette.grayColor,
                         fontSize: 12,
                       ),

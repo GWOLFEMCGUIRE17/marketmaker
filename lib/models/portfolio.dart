@@ -37,7 +37,7 @@ class Portfolio {
             ),
           );
         } catch (exception) {
-          Stock s = await StockServices.fetchStock("$ticker-USD");
+             Stock s = await StockServices.fetchStock("$ticker-USD");
           AssetCard card = AssetCard(asset: s);
           OneContext().push(
             MaterialPageRoute(
